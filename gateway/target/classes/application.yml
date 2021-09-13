@@ -1,0 +1,46 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: order
+          uri: http://localhost:8081
+          predicates:
+            - Path=/orders/**
+        - id: pay
+          uri: http://localhost:8082
+          predicates:
+            - Path=/pays/** 
+        - id: store
+          uri: http://localhost:8083
+          predicates:
+            - Path=/stores/**
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: order
+          uri: http://order:8080
+          predicates:
+            - Path=/orders/**
+        - id: pay
+          uri: http://pay:8080
+          predicates:
+            - Path=/pays/** 
+        - id: store
+          uri: http://store:8080
+          predicates:
+            - Path=/stores/**
+
+server:
+  port: 8080

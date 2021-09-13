@@ -8,6 +8,12 @@ public class OrderCanceled extends AbstractEvent {
         super();
     }
 
+    public OrderCanceled(Order order){
+        this();
+        this.setId(order.getId());
+    }
+
+
     public Long getId() {
         return id;
     }

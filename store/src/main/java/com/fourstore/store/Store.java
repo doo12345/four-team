@@ -2,7 +2,6 @@ package com.fourstore.store;
 
 import javax.persistence.*;
 import org.springframework.beans.BeanUtils;
-import java.util.List;
 
 @Entity
 @Table(name = "Store_table")

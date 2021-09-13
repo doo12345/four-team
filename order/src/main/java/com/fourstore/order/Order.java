@@ -1,8 +1,9 @@
 package com.fourstore.order;
+import java.util.Optional;
+
 import javax.persistence.*;
 
-import com.fourstore.external.Pay;
-import com.fourstore.external.PayService;
+import com.fourstore.order.external.Pay;
 
 @Entity
 @Table(name="order_table")
@@ -19,16 +20,30 @@ public class Order {
 
     @PostPersist
     private void publishOrderCreated(){
+
+            Pay pay = new Pay();
+
+            pay.setOrderId(String.valueOf(getId()));
+            if(getPrice()!=null) pay.setPayAmt(Integer.valueOf(getPrice()));
+    
+            Application.applicationContext.getBean(com.fourstore.order.external.PayService.class).pay(pay);
+            
             OrderCreated orderCreated = new OrderCreated(this);
             orderCreated.publish();
+    }
 
-            // Pay pay = new Pay();
+    @PostUpdate
+    private void publishOrderCancelled(){
+        if( "주문취소".equals(this.getStatus())){
+            // 이벤트를 발송하기 위하여 주문의 상세 정보를 조회
 
-            // pay.setOrderId(String.valueOf(getId()));
-            // if(getPrice()!=null)
-            //     pay.setPayAmt(Integer.valueOf(getPrice()));
-    
-            // Application.applicationContext.getBean(PayService.class).pay(pay);
+            OrderRepository orderRepository = Application.applicationContext.getBean(OrderRepository.class);
+            Optional<Order> orderOptional = orderRepository.findById(this.getId());
+            Order order = orderOptional.get();
+
+            OrderCanceled orderCancelled = new OrderCanceled(order);
+            orderCancelled.publish();
+        }
     }
 
     public Long getId() {

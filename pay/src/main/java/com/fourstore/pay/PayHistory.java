@@ -53,6 +53,11 @@ public class PayHistory {
         }
     }
 
+    @PostPersist
+    public void OrderPaid(){
+        System.out.println("%%%%%%%%%%%%%%%%S");
+    }
+
     public Long getId() {
         return this.id;
     }

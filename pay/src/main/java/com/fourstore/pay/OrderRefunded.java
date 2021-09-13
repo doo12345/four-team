@@ -1,6 +1,6 @@
 package com.fourstore.pay;
 
-public class OrderRefunded {
+public class OrderRefunded extends AbstractEvent {
     Long id;
     String payDate;
     String orderId;

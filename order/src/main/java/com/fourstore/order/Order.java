@@ -1,6 +1,9 @@
 package com.fourstore.order;
 import javax.persistence.*;
 
+import com.fourstore.external.Pay;
+import com.fourstore.external.PayService;
+
 @Entity
 @Table(name="order_table")
 public class Order {
@@ -14,11 +17,18 @@ public class Order {
     private String phonenumber;
     private String status;
 
-
     @PostPersist
     private void publishOrderCreated(){
             OrderCreated orderCreated = new OrderCreated(this);
-            //orderCreated.publish();
+            orderCreated.publish();
+
+            // Pay pay = new Pay();
+
+            // pay.setOrderId(String.valueOf(getId()));
+            // if(getPrice()!=null)
+            //     pay.setPayAmt(Integer.valueOf(getPrice()));
+    
+            // Application.applicationContext.getBean(PayService.class).pay(pay);
     }
 
     public Long getId() {

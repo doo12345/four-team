@@ -4,7 +4,7 @@ public class Pay {
 
     private Long id;
     private String orderId;
-    private Double 금액;
+    private int payAmt;
 
 
     public Long getId() {
@@ -21,12 +21,12 @@ public class Pay {
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
-    public Double get금액() {
-        return 금액;
+    public int getPayAmt() {
+        return payAmt;
     }
 
-    public void set금액(Double 금액) {
-        this.금액 = 금액;
+    public void setPayAmt(int payAmt) {
+        this.payAmt = payAmt;
     }
 
 }

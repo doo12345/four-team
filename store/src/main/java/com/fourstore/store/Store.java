@@ -1,8 +1,8 @@
 package com.fourstore.store;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import org.springframework.beans.BeanUtils;
+import java.util.List;
 
 @Entity
 @Table(name = "Store_table")
@@ -15,6 +15,15 @@ public class Store {
     Long orderId;
     Long deliveryId;
     String deliveryStatus;
+
+    @PostPersist
+    public void onPostPersist(){
+        DeliveryStarted 배달시작됨 = new DeliveryStarted();
+        배달시작됨.setOrderId(Long.valueOf(getOrderId()));
+        BeanUtils.copyProperties(this, 배달시작됨);
+        배달시작됨.publish();
+    }
+
 
     public Long getMenuId() {
         return this.menuId;

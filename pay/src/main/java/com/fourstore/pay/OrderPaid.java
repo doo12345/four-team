@@ -1,6 +1,6 @@
 package com.fourstore.pay;
 
-public class OrderPaid {
+public class OrderPaid extends AbstractEvent {
     Long id;
     String payDate;
     String orderId;

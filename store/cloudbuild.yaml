@@ -6,7 +6,7 @@ steps:
   #      'test',
   #      '-Dspring.profiles.active=test'
   #    ]
-  ### Build
+  ### Build.
   - id: 'build'
     name: 'gcr.io/cloud-builders/mvn'
     args: [

@@ -26,15 +26,15 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
     public String getCustomerid() {
-        return this.customerid;
+        return customerid;
     }
 
     public void setCustomerid(String customerid) {
@@ -42,7 +42,7 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public String getCustomername() {
-        return this.customername;
+        return customername;
     }
 
     public void setCustomername(String customername) {
@@ -50,7 +50,7 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public String getMenuid() {
-        return this.menuid;
+        return menuid;
     }
 
     public void setMenuid(String menuid) {
@@ -58,7 +58,7 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public int getQty() {
-        return this.qty;
+        return qty;
     }
 
     public void setQty(int qty) {
@@ -66,7 +66,7 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public String getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(String price) {
@@ -74,7 +74,7 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public String getAddress() {
-        return this.address;
+        return address;
     }
 
     public void setAddress(String address) {
@@ -82,11 +82,13 @@ public class OrderCreated extends AbstractEvent {
     }
 
     public String getPhonenumber() {
-        return this.phonenumber;
+        return phonenumber;
     }
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
+
+    
 
 }

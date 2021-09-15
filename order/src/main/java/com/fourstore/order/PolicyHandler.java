@@ -26,10 +26,19 @@ public class PolicyHandler{
 
             System.out.println("##### listener : " + deleveryStarted.getOrderId());
 
-            Order order = new Order();
+            /*Order order = new Order();
             order.setId(deleveryStarted.getOrderId());
             order.setStatus("deleveryStarted");
+            orderRepository.save(order);*/
+
+
+            java.util.Optional<Order> optionalOrder = orderRepository.findById(deleveryStarted.getOrderId());
+            Order order = optionalOrder.get();
+            //order.setDeliveryId(String.valueOf(deleveryStarted.getId()));
+            order.setStatus("deleveryStarted");
             orderRepository.save(order);
+      
+
 
         }}catch (Exception e){
             e.printStackTrace();

@@ -35,6 +35,8 @@ public class AbstractEvent {
         return json;
     }
 
+
+    //kafka에 발송
     public void publish(){
         this.publish(this.toJson());
     }

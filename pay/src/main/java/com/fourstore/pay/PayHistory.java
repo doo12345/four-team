@@ -25,6 +25,9 @@ public class PayHistory {
     @PrePersist
     public void onPrePersist(){
 
+        System.out.println(this.getClass().getName()+" : onPrePersist   -----------------start------------------");
+        System.out.println("주문상태 : "+orderStatus);
+
         if("취소".equals(orderStatus)){
             OrderCanceled 결제취소됨 = new OrderCanceled();
             BeanUtils.copyProperties(this, 결제취소됨);
@@ -51,6 +54,7 @@ public class PayHistory {
             }
 
         }
+        System.out.println(this.getClass().getName()+" : onPrePersist   -----------------END------------------");
     }
 
     @PostPersist

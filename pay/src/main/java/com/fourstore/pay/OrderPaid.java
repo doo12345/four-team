@@ -11,85 +11,67 @@ public class OrderPaid extends AbstractEvent {
     int qty;
     String payStatus;
     String orderStatus;
-
     public Long getId() {
-        return this.id;
+        return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getPayDate() {
-        return this.payDate;
+        return payDate;
     }
-
     public void setPayDate(String payDate) {
         this.payDate = payDate;
     }
-
     public String getOrderId() {
-        return this.orderId;
+        return orderId;
     }
-
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
-
     public String getCustomerId() {
-        return this.customerId;
+        return customerId;
     }
-
     public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
-
     public int getPayAmt() {
-        return this.payAmt;
+        return payAmt;
     }
-
     public void setPayAmt(int payAmt) {
         this.payAmt = payAmt;
     }
-
     public String getPayType() {
-        return this.payType;
+        return payType;
     }
-
     public void setPayType(String payType) {
         this.payType = payType;
     }
-
     public String getAddress() {
-        return this.address;
+        return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
-
     public int getQty() {
-        return this.qty;
+        return qty;
     }
-
     public void setQty(int qty) {
         this.qty = qty;
     }
-
     public String getPayStatus() {
-        return this.payStatus;
+        return payStatus;
     }
-
     public void setPayStatus(String payStatus) {
         this.payStatus = payStatus;
     }
-
     public String getOrderStatus() {
-        return this.orderStatus;
+        return orderStatus;
     }
-
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    
 
 }

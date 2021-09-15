@@ -17,9 +17,14 @@ public class PolicyHandler{
         if(orderPaid.isMe()){
             System.out.println("##### listener 주문정보받음 : " + orderPaid.toJson());
 
-            Store 주문 = new Store();
-            주문.setOrderId(Long.valueOf(orderPaid.getOrderId()));
-            storeRepository.save(주문);
+            Store st = new Store();
+            st.setOrderId(Long.valueOf(orderPaid.getOrderId()));
+            st.setAddress(orderPaid.address);
+            st.setDeliveryId((long)0);
+            st.setDeliveryStatus("배송");
+            st.setOrderId(Long.valueOf(orderPaid.getOrderId()));
+            st.setQuantity(orderPaid.getQty());
+            storeRepository.save(st);
         }
     }
 

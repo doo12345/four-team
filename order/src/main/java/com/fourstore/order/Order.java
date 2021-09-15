@@ -9,6 +9,7 @@ import com.fourstore.order.external.Pay;
 @Table(name="order_table")
 public class Order {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String customerid;
     private String menuid;
@@ -20,16 +21,24 @@ public class Order {
 
     @PostPersist
     private void publishOrderCreated(){
-
+            System.out.println(this.getClass().getName()+" : publishOrderCreated   -----------------start------------------");
             Pay pay = new Pay();
 
             pay.setOrderId(String.valueOf(getId()));
             if(getPrice()!=null) pay.setPayAmt(Integer.valueOf(getPrice()));
-    
+            System.out.println("customerid : "+this.customerid);
+            pay.setCustomerId(this.customerid);
+            if(getAddress()!=null) pay.setAddress(getAddress());
+            pay.setOrderStatus("주문");
+            pay.setPayType("주문유형");
+
+            //Req/Res 동기호출
             Application.applicationContext.getBean(com.fourstore.order.external.PayService.class).pay(pay);
             
+            //kafka에 발송하는 함수 호출 publish
             OrderCreated orderCreated = new OrderCreated(this);
             orderCreated.publish();
+            System.out.println(this.getClass().getName()+" : publishOrderCreated   -----------------END------------------");
     }
 
     @PostUpdate
@@ -41,13 +50,14 @@ public class Order {
             Optional<Order> orderOptional = orderRepository.findById(this.getId());
             Order order = orderOptional.get();
 
+            //kafka에 발송하는 함수 호출
             OrderCanceled orderCancelled = new OrderCanceled(order);
             orderCancelled.publish();
         }
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Long id) {
@@ -55,7 +65,7 @@ public class Order {
     }
 
     public String getCustomerid() {
-        return this.customerid;
+        return customerid;
     }
 
     public void setCustomerid(String customerid) {
@@ -63,7 +73,7 @@ public class Order {
     }
 
     public String getMenuid() {
-        return this.menuid;
+        return menuid;
     }
 
     public void setMenuid(String menuid) {
@@ -71,7 +81,7 @@ public class Order {
     }
 
     public int getQty() {
-        return this.qty;
+        return qty;
     }
 
     public void setQty(int qty) {
@@ -79,7 +89,7 @@ public class Order {
     }
 
     public String getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(String price) {
@@ -87,7 +97,7 @@ public class Order {
     }
 
     public String getAddress() {
-        return this.address;
+        return address;
     }
 
     public void setAddress(String address) {
@@ -95,16 +105,15 @@ public class Order {
     }
 
     public String getPhonenumber() {
-        return this.phonenumber;
+        return phonenumber;
     }
 
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
-    
     public String getStatus() {
-        return this.status;
+        return status;
     }
 
     public void setStatus(String status) {

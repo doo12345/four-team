@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 @Table(name = "Store_table")
 public class Store {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     Long id;
     Long menuId;
     int quantity;
